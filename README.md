@@ -1,6 +1,6 @@
 # sample
 
-A new Flutter project.
+A new Flutter test project.
 
 ## Getting Started
 
