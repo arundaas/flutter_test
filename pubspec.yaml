@@ -36,6 +36,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   form_field_validator: ^1.1.0
+  sqflite: ^2.3.0
+  provider: ^6.0.2
+  uuid: ^3.0.6
+  sizer: ^2.0.15
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
