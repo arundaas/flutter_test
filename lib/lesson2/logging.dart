@@ -2,6 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sample/lesson2/HomePage.dart';
 
+//email field
+
+class EmailInput extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+
+  const EmailInput({Key? key, required this.formKey}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: 300,
+        child: TextFormField(
+          // key: Key('emailInput'),
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Email',
+            hintText: 'Enter valid email id as abc@gmail.com',
+          ),
+          validator: MultiValidator([
+            RequiredValidator(errorText: "* Required"),
+            EmailValidator(errorText: "Enter valid email id"),
+          ]),
+        ));
+  }
+}
+
+class PasswordInput extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
+
+  const PasswordInput({Key? key, required this.formKey}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: 300,
+        child: TextFormField(
+            // key: Key('passwordInput'),
+            obscureText: true,
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+                hintText: 'Enter secure password'),
+            validator: MultiValidator([
+              RequiredValidator(errorText: "* Required"),
+              MinLengthValidator(6,
+                  errorText: "Password should be atleast 6 characters"),
+              MaxLengthValidator(15,
+                  errorText:
+                      "Password should not be greater than 15 characters")
+            ])
+            //validatePassword,        //Function to check validation
+            ));
+  }
+}
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -30,44 +85,22 @@ class __LoginPageState extends State<LoginPage> {
                       width: 200,
                       height: 150,
                       /*decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(50.0)),*/
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(50.0)),*/
                       child: Image.asset('assets/images/flutter-logo.png')),
                 ),
               ),
               Padding(
-                //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Email',
-                        hintText: 'Enter valid email id as abc@gmail.com'),
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: "* Required"),
-                      EmailValidator(errorText: "Enter valid email id"),
-                    ])),
-              ),
+                  //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: EmailInput(formKey: formkey)),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 15.0, right: 15.0, top: 15, bottom: 0),
                 //padding: EdgeInsets.symmetric(horizontal: 15),
-                child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Password',
-                        hintText: 'Enter secure password'),
-                    validator: MultiValidator([
-                      RequiredValidator(errorText: "* Required"),
-                      MinLengthValidator(6,
-                          errorText: "Password should be atleast 6 characters"),
-                      MaxLengthValidator(15,
-                          errorText:
-                              "Password should not be greater than 15 characters")
-                    ])
-                    //validatePassword,        //Function to check validation
-                    ),
+                child: PasswordInput(
+                  formKey: formkey,
+                ),
               ),
               TextButton(
                 style: TextButton.styleFrom(
@@ -84,8 +117,6 @@ class __LoginPageState extends State<LoginPage> {
                 // decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //     context, MaterialPageRoute(builder: (_) => HomePage()));
                     if (formkey.currentState!.validate()) {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (_) => HomePage()));
