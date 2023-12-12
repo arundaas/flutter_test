@@ -6,6 +6,22 @@ import 'package:uuid/uuid.dart';
 class TodoProvider extends ChangeNotifier {
   List todoItem = [];
 
+  Future selectData() async {
+    final dataList = await DBHelper.selectAll(DBHelper.todo);
+
+    todoItem = dataList
+        .map(
+          (item) => TodoModel(
+            id: item['id'],
+            title: item['title'],
+            description: item['description'],
+            date: item['date'],
+          ),
+        )
+        .toList();
+    notifyListeners();
+  }
+
   Future deleteTable() async {
     DBHelper.deleteTable(DBHelper.todo);
     todoItem.clear();
@@ -30,6 +46,15 @@ class TodoProvider extends ChangeNotifier {
       "description": newTodo.description,
       "date": newTodo.date,
     });
+    notifyListeners();
+  }
+
+  Future deleteById(id) async {
+    DBHelper.deleteById(
+      DBHelper.todo,
+      'id',
+      id,
+    );
     notifyListeners();
   }
 }

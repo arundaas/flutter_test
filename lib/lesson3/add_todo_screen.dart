@@ -205,23 +205,6 @@ class _AddTodoFormState extends State<AddTodoForm> {
                       ),
                     ),
                     content: const Text('Are you want to close'),
-                    // actions: [
-                    //   ElevatedButton(
-                    //     style: ElevatedButton.styleFrom(
-                    //       primary: Colors.white,
-                    //     ),
-                    //     onPressed: () {
-                    //       Navigator.pop(context);
-                    //       Navigator.of(context, rootNavigator: true).pop();
-                    //     },
-                    //     child: Text(
-                    //       'Return',
-                    //       style: TextStyle(
-                    //         color: Theme.of(context).primaryColor,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ],
                     actions: [
                       AddFormPopupYesNoButtonRaw(
                           context, widget.width, widget.height)
